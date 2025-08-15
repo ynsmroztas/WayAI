@@ -1,5 +1,5 @@
 # WayAI — Wayback & Common Crawl Recon (CLI + Web GUI)
-**Powered by [ynsmroztas](https://x.com/ynsmroztas)** • **powered by mitsec**
+
 
 ![WayAI Logo](assets/wayai_logo.png)
 
