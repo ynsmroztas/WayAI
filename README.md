@@ -28,6 +28,10 @@ docker build -t wayai .
 docker run --rm -p 8080:8080 wayai
 ```
 
+!Panel(/wayai-panel.jpeg)
+
+
+
 ## Repo Layout
 ```
 WayAI_GitHubRepo/
