@@ -28,7 +28,9 @@ docker build -t wayai .
 docker run --rm -p 8080:8080 wayai
 ```
 
-!Panel(/assets/wayai-panel.jpeg)
+![WayAI Logo](assets/wayai-panel.jpeg)
+
+![WayAI Logo](assets/wayai-results.jpeg)
 
 
 
