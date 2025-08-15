@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>WayAI Results</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+<nav class="navbar navbar-dark bg-dark mb-4">
+  <div class="container-fluid">
+    <a href="/" class="navbar-brand">WayAI — Results</a>
+    <span class="text-light-50 small">powered by ynsmroztas • powered by mitsec</span>
+  </div>
+</nav>
+
+<div class="container">
+  <div class="alert alert-secondary d-flex justify-content-between">
+    <div>
+      <strong>{{ domain }}</strong> — URLs: {{ counts.urls }} (new: {{ counts.new_urls }}) 
+      {% if scan_subs %} | Subdomains: {{ counts.subs }} (new: {{ counts.new_subs }}){% endif %}
+    </div>
+    <div class="text-muted">
+      Options: {% if include_cc %}CC{% else %}WB{% endif %}{% if with_params %} · params{% endif %}
+      {% if exts %} · exts={{ exts|join(' ') }}{% endif %}
+      {% if status %} · status=on{% endif %}
+      · threads={{ threads }}
+    </div>
+  </div>
+
+  <ul class="nav nav-tabs" id="tabs" role="tablist">
+    <li class="nav-item" role="presentation"><button class="nav-link active" data-bs-toggle="tab" data-bs-target="#urls" type="button" role="tab">URLs</button></li>
+    <li class="nav-item" role="presentation"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#newurls" type="button" role="tab">New URLs</button></li>
+    {% if status %}<li class="nav-item" role="presentation"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#urlstatus" type="button" role="tab">URL Status</button></li>{% endif %}
+    {% if scan_subs %}
+      <li class="nav-item" role="presentation"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#subs" type="button" role="tab">Subdomains</button></li>
+      <li class="nav-item" role="presentation"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#newsubs" type="button" role="tab">New Subs</button></li>
+      {% if status %}<li class="nav-item" role="presentation"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#substatus" type="button" role="tab">Sub Status</button></li>{% endif %}
+    {% endif %}
+  </ul>
+
+  <div class="tab-content p-3 bg-white border border-top-0 rounded-bottom shadow-sm">
+    <div class="tab-pane fade show active" id="urls" role="tabpanel">
+      <ol class="small">
+        {% for u in urls %}<li><a href="{{ u }}" target="_blank">{{ u }}</a></li>{% endfor %}
+      </ol>
+    </div>
+    <div class="tab-pane fade" id="newurls" role="tabpanel">
+      {% if new_urls %}
+      <ol class="small">
+        {% for u in new_urls %}<li><a href="{{ u }}" target="_blank">{{ u }}</a></li>{% endfor %}
+      </ol>
+      {% else %}<div class="text-muted">No new URLs</div>{% endif %}
+    </div>
+    {% if status %}
+    <div class="tab-pane fade" id="urlstatus" role="tabpanel">
+      <div class="table-responsive">
+        <table class="table table-sm">
+          <thead><tr><th>URL</th><th>Status</th><th>Content-Length</th></tr></thead>
+          <tbody>
+          {% for url,code,cl in url_status %}
+            <tr><td class="small"><a href="{{ url }}" target="_blank">{{ url }}</a></td><td>{{ code }}</td><td>{{ cl }}</td></tr>
+          {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+    {% endif %}
+
+    {% if scan_subs %}
+    <div class="tab-pane fade" id="subs" role="tabpanel">
+      <ol class="small">{% for s in subs %}<li>{{ s }}</li>{% endfor %}</ol>
+    </div>
+    <div class="tab-pane fade" id="newsubs" role="tabpanel">
+      {% if new_subs %}<ol class="small">{% for s in new_subs %}<li>{{ s }}</li>{% endfor %}</ol>{% else %}
+      <div class="text-muted">No new subdomains</div>{% endif %}
+    </div>
+    {% if status %}
+    <div class="tab-pane fade" id="substatus" role="tabpanel">
+      <div class="table-responsive">
+        <table class="table table-sm">
+          <thead><tr><th>Subdomain</th><th>Status</th><th>Content-Length</th></tr></thead>
+          <tbody>
+          {% for sub,code,cl in sub_status %}
+            <tr><td class="small">{{ sub }}</td><td>{{ code }}</td><td>{{ cl }}</td></tr>
+          {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+    {% endif %}
+    {% endif %}
+  </div>
+
+  <div class="mt-4">
+    <a href="/" class="btn btn-outline-secondary">Run Another Scan</a>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
