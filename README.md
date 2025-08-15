@@ -1,6 +1,8 @@
 # WayAI — Wayback & Common Crawl Recon (CLI + Web GUI)
 **Powered by [ynsmroztas](https://x.com/ynsmroztas)** • **powered by mitsec**
 
+![WayAI Logo](assets/wayai_logo.png)
+
 WayAI provides:
 - `wayai_cli/WayAI.py`: CLI recon tool (Wayback + Common Crawl + subdomain extraction + diffs + optional HTTP status)
 - `webgui/`: Flask Web GUI with Bootstrap (same core features, tabbed results)
@@ -46,4 +48,4 @@ WayAI_GitHubRepo/
 ```
 
 ---
-Follow updates: **x.com/ynsmroztas** — Repo branding: WayAI • powered by ynsmroztas • powered by mitsec
+Follow updates: **x.com/ynsmroztas** — Repo branding: WayAI  • powered by mitsec •
